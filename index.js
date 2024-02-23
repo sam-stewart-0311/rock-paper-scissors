@@ -1,6 +1,8 @@
 const playerChoice = '';
 const computerChoice = getComputerChoice();
-let score = 0;
+let playerScore = 0;
+let computerScore = 0;
+let totalRounds = 0;
 let roundsPlayed = 0;
 
 function getComputerChoice() {
@@ -18,7 +20,7 @@ function getComputerChoice() {
 };
 
 function playRound(playerChoice, computerChoice) {
-  playerChoice = prompt();
+  playerChoice = prompt('Choose Rock, Paper or Scissors');
   computerChoice = getComputerChoice();
 
   let playerChoiceLowerCase = playerChoice.toLowerCase();
@@ -29,47 +31,75 @@ function playRound(playerChoice, computerChoice) {
     if (computerChoice === 'rock') {
       result = "It's a Tie";
     } else if (computerChoice === 'paper') {
-      result = "You Lose"
+      result = "You Lose the Round"
     } else if (computerChoice === 'scissors') {
-      result = "You Win"
+      result = "You Win the Round"
     }
 
   } else if (playerChoiceLowerCase === 'paper') {
 
     if (computerChoice === 'rock') {
-      result = "You Win";
+      result = "You Win the Round";
     } else if (computerChoice === 'paper') {
       result = "It's a Tie"
     } else if (computerChoice === 'scissors') {
-      result = "You Lose"
+      result = "You Lose the Round"
     }
 
   } else if (playerChoiceLowerCase === 'scissors') {
 
     if (computerChoice === 'rock') {
-      result = "You Lose";
+      result = "You Lose the Round";
     } else if (computerChoice === 'paper') {
-      result = "You Win"
+      result = "You Win the Round"
     } else if (computerChoice === 'scissors') {
       result = "It's a Tie"
     }
 
   } else {
+    roundsPlayed--
     return 'You need to choose Rock, Paper or Scissors'
   }
 
-  if (result === 'You Win') {
-    score++
+  if (result === 'You Win the Round') {
+    playerScore++
+  } else if ( result === 'You Lose the Round') {
+    computerScore++
   }
-  
-  roundsPlayed++
 
   let playerChoiceCapitalised = playerChoiceLowerCase.charAt(0).toUpperCase() + playerChoiceLowerCase.slice(1);
   let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
-  let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}! Score: ${score}/${roundsPlayed}`;
+  let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}!`;
+  // let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}! \n Player Score: ${playerScore} Computer Score: ${computerScore}`;
 
   return message;
 };
 
-console.log(playRound(playerChoice, computerChoice));
+function playGame() {
 
+  totalRounds = +prompt('How many rounds would you like to Play?');
+  let result = '';
+
+  if (isNaN(totalRounds)) {
+    console.log('You need to enter a valid number');
+    playGame();
+  } else {
+
+    for (roundsPlayed = 1; roundsPlayed < (totalRounds + 1); roundsPlayed++) {
+      console.log(playRound(playerChoice, computerChoice));
+    }
+    
+    if (playerScore > computerScore) {
+      result = "You Win!"
+    } else if (playerScore < computerScore) {
+      result = "You Lose!"
+    } else {
+      result = "It's a Tie!"
+    }
+  
+    let message = `After ${totalRounds} rounds, you scored ${playerScore}, the Computer scored ${computerScore}, ${result}`
+    console.log(message);
+  }
+}
+
+playGame();
