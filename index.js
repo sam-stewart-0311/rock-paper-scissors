@@ -1,5 +1,7 @@
 const playerChoice = '';
 const computerChoice = getComputerChoice();
+let score = 0;
+let roundsPlayed = 0;
 
 function getComputerChoice() {
   let randomNumber = Math.random();
@@ -56,7 +58,15 @@ function playRound(playerChoice, computerChoice) {
     return 'You need to choose Rock, Paper or Scissors'
   }
 
-  let message = `You chose ${playerChoice}, the Computer chose ${computerChoice}, ${result}!`;
+  if (result === 'You Win') {
+    score++
+  }
+  
+  roundsPlayed++
+
+  let playerChoiceCapitalised = playerChoiceLowerCase.charAt(0).toUpperCase() + playerChoiceLowerCase.slice(1);
+  let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+  let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}! Score: ${score}/${roundsPlayed}`;
 
   return message;
 };
