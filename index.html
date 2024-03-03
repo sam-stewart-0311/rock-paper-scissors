@@ -3,16 +3,48 @@
   <head>
     <meta charset="utf-8">
     <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
   </head>
 
   <body>
-    <image id="player-choice-img" src="./images/rock.png" alt="rock-paper-or-scissors-hand-gesture">
-    <label for="player-choice">Player Choice:</label>
-    <select name="player-choice" id="player-choice">
-      <option value="rock">Rock</option>
-      <option value="paper">Paper</option>
-      <option value="scissors">Scissors</option>
-    </select>
+    <div id="page-container">
+      <div id="game-container">
+
+        <div id="icons-container">
+
+          <div id="icons-left">
+            <div class="image-container">
+              <image id="player-choice-img" src="./images/rock.png" alt="rock-paper-or-scissors-hand-gesture" height="150">
+            </div>
+            <div>
+              <label for="player-choice">Player Choice:</label>
+              <select name="player-choice" id="player-choice">
+                <option value="rock">Rock</option>
+                <option value="paper">Paper</option>
+                <option value="scissors">Scissors</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="icons-right">
+            <div class="image-container">
+              <image id="computer-choice-img" src="./images/rock.png" alt="rock, paper or scissors hand gesture" height="150">
+            </div>
+            <div>
+              <label>Computer Choice: </label>
+              <span id="computer-choice-text">Rock</span>
+            </div>
+          </div>
+
+        </div>
+        <button id="play-btn">Play</button>
+      </div>
+      
+    </div>
+
     <script src="index.js"></script>
   </body>
   

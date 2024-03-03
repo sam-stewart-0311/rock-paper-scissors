@@ -1,17 +1,19 @@
-
-let computerChoice = getComputerChoice();
+let playerChoice = '';
+let computerChoice = '';
 let playerScore = 0;
 let computerScore = 0;
 let totalRounds = 0;
 let roundsPlayed = 0;
 
+// Handle Player Choice
+
 const playerChoiceInput = document.querySelector('#player-choice');
 const playerChoiceImg = document.querySelector('#player-choice-img');
-let playerChoice = '';
+
 playerChoiceInput.addEventListener('change', getPlayerChoice);
 
 function getPlayerChoice() {
-  playerChoice = playerChoiceInput.value;
+  let result = playerChoiceInput.value;
 
   if (playerChoiceInput.value === 'rock') {
     playerChoiceImg.src = './images/rock.png';
@@ -20,7 +22,14 @@ function getPlayerChoice() {
   } else if (playerChoiceInput.value === 'scissors') {
     playerChoiceImg.src = './images/scissors.png';
   }
+
+  return result;
 };
+
+// Handle Computer Choice
+
+const computerChoiceImg = document.querySelector('#computer-choice-img');
+const computerChoiceText = document.querySelector('#computer-choice-text');
 
 function getComputerChoice() {
   let randomNumber = Math.random();
@@ -28,19 +37,28 @@ function getComputerChoice() {
 
   if (randomNumber < 1/3) {
     result = 'rock';
+    computerChoiceImg.src = './images/rock.png';
+    computerChoiceText.textContent = 'Rock';
   } else if (randomNumber >= 1/3 && randomNumber < 2/3) {
     result = 'paper';
+    computerChoiceImg.src = './images/paper.png';
+    computerChoiceText.textContent = 'Paper';
   } else if (randomNumber >= 2/3 && randomNumber < 1) {
     result = 'scissors';
+    computerChoiceImg.src = './images/scissors.png';
+    computerChoiceText.textContent = 'Scissors';
   }
   return result;
 };
 
+const playBtn = document.querySelector('#play-btn');
+playBtn.addEventListener('click', playRound);
+
 function playRound(playerChoice, computerChoice) {
-  playerChoice = prompt('Choose Rock, Paper or Scissors');
+  playerChoice = getPlayerChoice();
   computerChoice = getComputerChoice();
 
-  let playerChoiceLowerCase = playerChoice.toLowerCase();
+  //let playerChoiceLowerCase = playerChoice.toLowerCase();
   let result = '';
   
   if (playerChoiceLowerCase === 'rock') {
