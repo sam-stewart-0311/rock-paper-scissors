@@ -1,9 +1,26 @@
-const playerChoice = '';
-const computerChoice = getComputerChoice();
+
+let computerChoice = getComputerChoice();
 let playerScore = 0;
 let computerScore = 0;
 let totalRounds = 0;
 let roundsPlayed = 0;
+
+const playerChoiceInput = document.querySelector('#player-choice');
+const playerChoiceImg = document.querySelector('#player-choice-img');
+let playerChoice = '';
+playerChoiceInput.addEventListener('change', getPlayerChoice);
+
+function getPlayerChoice() {
+  playerChoice = playerChoiceInput.value;
+
+  if (playerChoiceInput.value === 'rock') {
+    playerChoiceImg.src = './images/rock.png';
+  } else if (playerChoiceInput.value === 'paper') {
+    playerChoiceImg.src = './images/paper.png';
+  } else if (playerChoiceInput.value === 'scissors') {
+    playerChoiceImg.src = './images/scissors.png';
+  }
+};
 
 function getComputerChoice() {
   let randomNumber = Math.random();
@@ -70,7 +87,6 @@ function playRound(playerChoice, computerChoice) {
   let playerChoiceCapitalised = playerChoiceLowerCase.charAt(0).toUpperCase() + playerChoiceLowerCase.slice(1);
   let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
   let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}!`;
-  // let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}! \n Player Score: ${playerScore} Computer Score: ${computerScore}`;
 
   return message;
 };
