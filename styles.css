@@ -11,7 +11,7 @@
   position: absolute;
   z-index: 200;
   height: 100vh;
-  width: 100vw;
+  width: 100vw ;
   top: 0;
   left: 0;
   display: flex;
@@ -30,15 +30,15 @@
   top: 50%;
   left: 50%;
   height: 200px;
-  width: 400px;
+  width: 420px;
   margin-top: -100px;
-  margin-left: -200px;
+  margin-left: -210px;
   background-color: rgb(36, 36, 36);
   border: 1px solid white;
   border-radius: 10px;
 }
 
-.welcome {
+.heading {
   font-size: 18px;
 }
 
@@ -72,6 +72,7 @@
 
 .blurred {
   filter: blur(4px);
+  transition: filter 1s ease-in-out;
 }
 
 #page-container {
@@ -81,7 +82,6 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(36, 36, 36);
-  /* filter: blur(4px); */
   z-index: 100;
 }
 

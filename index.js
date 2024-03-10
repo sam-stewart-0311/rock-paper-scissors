@@ -2,7 +2,7 @@ let playerChoice = '';
 let computerChoice = '';
 let playerScore = 0;
 let computerScore = 0;
-let totalRounds = 0;
+let totalRounds = 1;
 let roundsPlayed = 0;
 let currentRound = 1;
 
@@ -27,7 +27,7 @@ function createPopUp() {
 
   const welcomeText = document.createElement('p');
   welcomeText.textContent = 'Welcome to Rock, Paper, Scissors.';
-  welcomeText.classList.add('pop-up-item', 'welcome');
+  welcomeText.classList.add('pop-up-item', 'heading');
   popUpContainer.appendChild(welcomeText);
 
   const roundsText = document.createElement('p');
@@ -62,7 +62,7 @@ function createPopUp() {
   startBtn.textContent = 'Start Game';
   popUpContainer.appendChild(startBtn);
 
-  startBtn.addEventListener('click', playGame);
+  startBtn.addEventListener('click', startGame);
 }
 
 function removePopUp() {
@@ -121,7 +121,7 @@ function getComputerChoice() {
 // Handle Play Round
 
 const playBtn = document.querySelector('#play-btn');
-playBtn.addEventListener('click', playRound);
+playBtn.addEventListener('click', playGame);
 
 const playerScoreReadout = document.querySelector('#player-score-readout');
 const computerScoreReadout = document.querySelector('#computer-score-readout');
@@ -129,10 +129,10 @@ const messageReadout = document.querySelector('#message-readout');
 const roundReadout = document.querySelector('#round-readout');
 
 function playRound(playerChoice, computerChoice) {
+  
   playerChoice = getPlayerChoice();
   computerChoice = getComputerChoice();
 
-  //let playerChoiceLowerCase = playerChoice.toLowerCase();
   let result = '';
   
   if (playerChoice === 'rock') {
@@ -180,16 +180,115 @@ function playRound(playerChoice, computerChoice) {
   let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
   let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}!`;
 
-  currentRound++;
+  
   messageReadout.textContent = message;
   roundReadout.textContent = currentRound;
+  
 };
 
-// Handle Play Game 
+// Handle Start Game 
 
-
-
-function playGame() {
+function startGame() {
   removePopUp();
 }
 
+//Handle Play Game 
+
+function playGame() {
+  playRound();
+  currentRound++;
+
+  if (currentRound === (totalRounds +1)) {
+    playBtn.setAttribute('disabled', 'true');
+    setTimeout(endGame, 1000);
+    
+  }
+
+}
+
+// Handle End Game
+
+function endGame() {
+
+  let result = '';
+  let message = '';
+  
+  if (playerScore > computerScore) {
+    result = 'You Win';
+  } else if (playerScore < computerScore) {
+    result = 'You Lose';
+  } else if (playerScore === computerScore) {
+    result = "It's a Tie";
+  }
+
+  message = `After ${totalRounds} Rounds, you scored ${playerScore}, the Computer scored ${computerScore}, ${result}!`
+
+  pageContainer.classList.add('blurred');
+
+  coverPage.classList.add('cover-page');
+  body.appendChild(coverPage);
+
+  const popUpContainer = document.createElement('div');
+  popUpContainer.classList.add('pop-up-container');
+  coverPage.appendChild(popUpContainer);
+
+  const gameOverText = document.createElement('p');
+  gameOverText.textContent = 'Game Over';
+  gameOverText.classList.add('pop-up-item', 'heading');
+  popUpContainer.appendChild(gameOverText);
+
+  const resultText = document.createElement('p');
+  resultText.textContent = message;
+  resultText.classList.add('pop-up-item', 'pop-up-text');
+  popUpContainer.appendChild(resultText);
+
+  const resetBtn = document.createElement('button');
+  resetBtn.classList.add('pop-up-item', 'start-btn');
+  resetBtn.textContent = 'Play Again';
+  popUpContainer.appendChild(resetBtn);
+
+  resetBtn.addEventListener('click', resetGame);
+
+  let opacity = 0;
+  coverPage.style.opacity = 0;
+
+  let interval = setInterval(() => {
+    opacity += 0.01;
+    coverPage.style.opacity = opacity;
+
+    if (Math.abs(opacity - 1) < 0.01) {
+      clearInterval(interval);
+    } 
+
+  }, 15);
+
+
+
+}
+
+// Handle Reset Game
+
+function resetGame() {
+  playerChoiceInput.value = 'rock';
+  getPlayerChoice();
+
+  computerChoiceImg.src = './images/rock.png';
+  computerChoiceText.textContent = 'Rock';
+
+  playerScore = 0;
+  computerScore = 0;
+  totalRounds = 1;
+  roundsPlayed = 0;
+  currentRound = 1;
+
+  playerScoreReadout.textContent = playerScore;
+  computerScoreReadout.textContent = computerScore;
+
+  messageReadout.textContent = '';
+  roundReadout.textContent = currentRound;
+
+  playBtn.removeAttribute('disabled');
+
+  removePopUp();
+  createPopUp();
+}
