@@ -258,11 +258,10 @@ function endGame() {
 
     if (Math.abs(opacity - 1) < 0.01) {
       clearInterval(interval);
+      coverPage.style.opacity = '1';
     } 
 
   }, 15);
-
-
 
 }
 
