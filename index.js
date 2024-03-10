@@ -6,13 +6,15 @@ let totalRounds = 0;
 let roundsPlayed = 0;
 
 // Handle Creating Pop Up
-function createPopUp() {
-  const body = document.querySelector('body');
 
-  const pageContainer = document.querySelector('#page-container');
+const body = document.querySelector('body');
+const pageContainer = document.querySelector('#page-container');
+const coverPage = document.createElement('div');
+
+function createPopUp() {
+  
   pageContainer.classList.add('blurred');
 
-  const coverPage = document.createElement('div');
   coverPage.classList.add('cover-page');
   body.appendChild(coverPage);
 
@@ -56,7 +58,13 @@ function createPopUp() {
   popUpContainer.appendChild(startBtn);
 }
 
+function removePopUp() {
+  body.removeChild(coverPage);
+  pageContainer.classList.remove('blurred');
+}
+
 createPopUp();
+removePopUp();
 
 // Handle Player Choice
 
