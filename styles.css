@@ -27,6 +27,11 @@
 }
 
 #game-top {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+#game-middle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,6 +106,10 @@
   width: 100%;
   background-color: rgb(36, 36, 36);
   font-size: 14px;
+}
+
+#score-title {
+  font-size: 18px;
 }
 
 #scores-readout-container {
