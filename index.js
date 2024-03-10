@@ -51,8 +51,14 @@ function getComputerChoice() {
   return result;
 };
 
+// Handle Play Round
+
 const playBtn = document.querySelector('#play-btn');
 playBtn.addEventListener('click', playRound);
+
+const playerScoreReadout = document.querySelector('#player-score-readout');
+const computerScoreReadout = document.querySelector('#computer-score-readout');
+const messageReadout = document.querySelector('#message-readout');
 
 function playRound(playerChoice, computerChoice) {
   playerChoice = getPlayerChoice();
@@ -61,52 +67,52 @@ function playRound(playerChoice, computerChoice) {
   //let playerChoiceLowerCase = playerChoice.toLowerCase();
   let result = '';
   
-  if (playerChoiceLowerCase === 'rock') {
+  if (playerChoice === 'rock') {
 
     if (computerChoice === 'rock') {
       result = "It's a Tie";
     } else if (computerChoice === 'paper') {
-      result = "You Lose the Round"
+      result = "You Lose"
     } else if (computerChoice === 'scissors') {
-      result = "You Win the Round"
+      result = "You Win"
     }
 
-  } else if (playerChoiceLowerCase === 'paper') {
+  } else if (playerChoice === 'paper') {
 
     if (computerChoice === 'rock') {
-      result = "You Win the Round";
+      result = "You Win";
     } else if (computerChoice === 'paper') {
-      result = "It's a Tie"
+      result = "Its a Tie"
     } else if (computerChoice === 'scissors') {
-      result = "You Lose the Round"
+      result = "You Lose"
     }
 
-  } else if (playerChoiceLowerCase === 'scissors') {
+  } else if (playerChoice === 'scissors') {
 
     if (computerChoice === 'rock') {
-      result = "You Lose the Round";
+      result = "You Lose";
     } else if (computerChoice === 'paper') {
-      result = "You Win the Round"
+      result = "You Win"
     } else if (computerChoice === 'scissors') {
       result = "It's a Tie"
     }
 
-  } else {
-    roundsPlayed--
-    return 'You need to choose Rock, Paper or Scissors'
-  }
+  } 
 
-  if (result === 'You Win the Round') {
+  if (result === 'You Win') {
     playerScore++
-  } else if ( result === 'You Lose the Round') {
+  } else if ( result === 'You Lose') {
     computerScore++
   }
 
-  let playerChoiceCapitalised = playerChoiceLowerCase.charAt(0).toUpperCase() + playerChoiceLowerCase.slice(1);
+  playerScoreReadout.textContent = playerScore;
+  computerScoreReadout.textContent = computerScore;
+
+  let playerChoiceCapitalised = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
   let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
   let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}!`;
 
-  return message;
+  messageReadout.textContent = message;
 };
 
 function playGame() {
@@ -136,4 +142,3 @@ function playGame() {
   }
 }
 
-playGame();
