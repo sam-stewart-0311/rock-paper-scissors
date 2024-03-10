@@ -4,8 +4,11 @@ let playerScore = 0;
 let computerScore = 0;
 let totalRounds = 0;
 let roundsPlayed = 0;
+let currentRound = 1;
 
 // Handle Creating Pop Up
+
+document.addEventListener('DOMContentLoaded', createPopUp);
 
 const body = document.querySelector('body');
 const pageContainer = document.querySelector('#page-container');
@@ -37,12 +40,10 @@ function createPopUp() {
   popUpContainer.appendChild(chooseRoundsContainer);
 
   const roundsLabel = document.createElement('label');
-  roundsLabel.setAttribute('for', 'rounds');
   roundsLabel.textContent = 'Number of Rounds: ';
   chooseRoundsContainer.appendChild(roundsLabel);
 
   const roundsInpt = document.createElement('select');
-  roundsInpt.setAttribute('name', 'rounds');
   roundsInpt.classList.add('rounds-inpt');
   chooseRoundsContainer.appendChild(roundsInpt);
 
@@ -52,10 +53,16 @@ function createPopUp() {
     roundsInpt.appendChild(roundsOption);
   }
 
+  roundsInpt.addEventListener('change', () => {
+    totalRounds = +roundsInpt.value;
+  })
+
   const startBtn = document.createElement('button');
   startBtn.classList.add('pop-up-item', 'start-btn');
   startBtn.textContent = 'Start Game';
   popUpContainer.appendChild(startBtn);
+
+  startBtn.addEventListener('click', playGame);
 }
 
 function removePopUp() {
@@ -64,7 +71,6 @@ function removePopUp() {
 }
 
 createPopUp();
-removePopUp();
 
 // Handle Player Choice
 
@@ -120,6 +126,7 @@ playBtn.addEventListener('click', playRound);
 const playerScoreReadout = document.querySelector('#player-score-readout');
 const computerScoreReadout = document.querySelector('#computer-score-readout');
 const messageReadout = document.querySelector('#message-readout');
+const roundReadout = document.querySelector('#round-readout');
 
 function playRound(playerChoice, computerChoice) {
   playerChoice = getPlayerChoice();
@@ -173,33 +180,16 @@ function playRound(playerChoice, computerChoice) {
   let computerChoiceCapitalised = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
   let message = `You chose ${playerChoiceCapitalised}, the Computer chose ${computerChoiceCapitalised}, ${result}!`;
 
+  currentRound++;
   messageReadout.textContent = message;
+  roundReadout.textContent = currentRound;
 };
 
+// Handle Play Game 
+
+
+
 function playGame() {
-
-  totalRounds = +prompt('How many rounds would you like to Play?');
-  let result = '';
-
-  if (isNaN(totalRounds)) {
-    console.log('You need to enter a valid number');
-    playGame();
-  } else {
-
-    for (roundsPlayed = 1; roundsPlayed < (totalRounds + 1); roundsPlayed++) {
-      console.log(playRound(playerChoice, computerChoice));
-    }
-    
-    if (playerScore > computerScore) {
-      result = "You Win!"
-    } else if (playerScore < computerScore) {
-      result = "You Lose!"
-    } else {
-      result = "It's a Tie!"
-    }
-  
-    let message = `After ${totalRounds} rounds, you scored ${playerScore}, the Computer scored ${computerScore}, ${result}`
-    console.log(message);
-  }
+  removePopUp();
 }
 
