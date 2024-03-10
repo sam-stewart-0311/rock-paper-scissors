@@ -13,15 +13,15 @@
     <div id="page-container">
       <div id="game-container">
 
-        <div id="icons-container">
+        <div id="game-top">
 
           <div id="icons-left">
             <div class="image-container">
               <image id="player-choice-img" src="./images/rock.png" alt="rock-paper-or-scissors-hand-gesture" height="150">
             </div>
             <div>
-              <label for="player-choice">Player Choice:</label>
-              <select name="player-choice" id="player-choice">
+              <label for="player-choice-input" id="player-choice-label">Player Choice:</label>
+              <select name="player-choice" id="player-choice-input">
                 <option value="rock">Rock</option>
                 <option value="paper">Paper</option>
                 <option value="scissors">Scissors</option>
@@ -34,13 +34,41 @@
               <image id="computer-choice-img" src="./images/rock.png" alt="rock, paper or scissors hand gesture" height="150">
             </div>
             <div>
-              <label>Computer Choice: </label>
+              <label id="computer-choice-label">Computer Choice: </label>
               <span id="computer-choice-text">Rock</span>
             </div>
           </div>
 
         </div>
-        <button id="play-btn">Play</button>
+
+        <div id="game-bottom">
+
+          <div id="scores-container">
+            <div id="score-title">
+              <span>Score:</span>
+            </div>
+    
+            <div id="scores-readout-container">
+              <div id="player-score">
+                <label>Player: </label> &nbsp
+                <span>0</span>
+              </div>
+              <div id="computer-score">
+                <label>Computer: </label> &nbsp
+                <span>0</span>
+              </div>
+          </div>
+
+          <div id="play-btn-container">
+            <button id="play-btn">Play Round</button>
+          </div>
+  
+        </div>
+
+
+          
+        </div>
+        
       </div>
       
     </div>

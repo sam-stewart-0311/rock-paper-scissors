@@ -7,7 +7,7 @@ let roundsPlayed = 0;
 
 // Handle Player Choice
 
-const playerChoiceInput = document.querySelector('#player-choice');
+const playerChoiceInput = document.querySelector('#player-choice-input');
 const playerChoiceImg = document.querySelector('#player-choice-img');
 
 playerChoiceInput.addEventListener('change', getPlayerChoice);
