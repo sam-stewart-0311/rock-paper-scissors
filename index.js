@@ -5,6 +5,59 @@ let computerScore = 0;
 let totalRounds = 0;
 let roundsPlayed = 0;
 
+// Handle Creating Pop Up
+function createPopUp() {
+  const body = document.querySelector('body');
+
+  const pageContainer = document.querySelector('#page-container');
+  pageContainer.classList.add('blurred');
+
+  const coverPage = document.createElement('div');
+  coverPage.classList.add('cover-page');
+  body.appendChild(coverPage);
+
+  const popUpContainer = document.createElement('div');
+  popUpContainer.classList.add('pop-up-container');
+  coverPage.appendChild(popUpContainer);
+
+  const welcomeText = document.createElement('p');
+  welcomeText.textContent = 'Welcome to Rock, Paper, Scissors.';
+  welcomeText.classList.add('pop-up-item', 'welcome');
+  popUpContainer.appendChild(welcomeText);
+
+  const roundsText = document.createElement('p');
+  roundsText.textContent = 'How many rounds would you like to play?';
+  roundsText.classList.add('pop-up-item', 'pop-up-text');
+  popUpContainer.appendChild(roundsText);
+
+  const chooseRoundsContainer = document.createElement('div');
+  chooseRoundsContainer.classList.add('pop-up-item', 'pop-up-text');
+  popUpContainer.appendChild(chooseRoundsContainer);
+
+  const roundsLabel = document.createElement('label');
+  roundsLabel.setAttribute('for', 'rounds');
+  roundsLabel.textContent = 'Number of Rounds: ';
+  chooseRoundsContainer.appendChild(roundsLabel);
+
+  const roundsInpt = document.createElement('select');
+  roundsInpt.setAttribute('name', 'rounds');
+  roundsInpt.classList.add('rounds-inpt');
+  chooseRoundsContainer.appendChild(roundsInpt);
+
+  for (let i = 1; i <= 10; i++) {
+    const roundsOption = document.createElement('option');
+    roundsOption.textContent = i;
+    roundsInpt.appendChild(roundsOption);
+  }
+
+  const startBtn = document.createElement('button');
+  startBtn.classList.add('pop-up-item', 'start-btn');
+  startBtn.textContent = 'Start Game';
+  popUpContainer.appendChild(startBtn);
+}
+
+createPopUp();
+
 // Handle Player Choice
 
 const playerChoiceInput = document.querySelector('#player-choice-input');
